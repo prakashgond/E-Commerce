@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Commerce Website</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .cart {
+        margin-bottom: 20px;
+    }
+
+    .cart ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .cart button {
+        display: block;
+        margin: 10px auto;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .payment-form {
+        display: none;
+    }
+
+    .payment-form input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    .payment-form button {
+        display: block;
+        margin: 10px auto;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .message {
+        text-align: center;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>E-Commerce Website</h1>
+    <div class="cart">
+        <h2>Shopping Cart</h2>
+        <ul id="cart-items"></ul>
+        <p>Total: <span id="total">$10.00</span></p>
+        <button onclick="checkout()">Checkout</button>
+    </div>
+    <div class="payment-form" id="payment-form">
+        <h2>Payment Form</h2>
+        <label for="card-number">Card Number:</label>
+        <input type="text" id="card-number">
+        <label for="exp-date">Expiration Date:</label>
+        <input type="text" id="exp-date">
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv">
+        <button onclick="processPayment()">Process Payment</button>
+    </div>
+    <div class="message" id="message"></div>
+</div>
+<script>
+    let cartItems = [];
+    let total = 10;
+
+    function addToCart(itemName, itemPrice) {
+        cartItems.push({ name: itemName, price: itemPrice });
+        total += itemPrice;
+        updateCart();
+    }
+
+    function updateCart() {
+        const cartList = document.getElementById('cart-items');
+        cartList.innerHTML = '';
+        cartItems.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = `${item.name} - $${item.price}`;
+            cartList.appendChild(li);
+        });
+        document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+    }
+
+    function checkout() {
+        document.getElementById('payment-form').style.display = 'block';
+    }
+
+    function processPayment() {
+        // For demonstration purposes, we'll simply display a success message
+        document.getElementById('message').textContent = 'Payment processed successfully!';
+        // Reduce the total to $5
+        total = 5;
+        updateCart();
+    }
+</script>
+</body>
+</html>
